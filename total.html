@@ -1,0 +1,84 @@
+      </div>-->
+      <div class="section">
+        <h4>🔥 금주 이슈</h4>
+        <p id="sadang12Curr">로딩 중...</p>
+      </div>
+      <a href="https://cnt-mh.github.io/REDEV/SITE2/SD/12/index.html" target="_blank">🌐 통합페이지바로가기</a>
+    </div>
+	
+	
+     <div class="card sdb344" id="sdb344Card">
+      <h3>신대방3구역 신통</h3>
+      <div class="badge" id="sdb344Stage">로딩 중...</div>
+     <!-- <div class="section">
+        <h4>📌 전주 이슈</h4>
+        <p id="sdb344Prev">로딩 중...</p>
+      </div>-->
+      <div class="section">
+        <h4>🔥 금주 이슈</h4>
+        <p id="sdb344Curr">로딩 중...</p>
+      </div>
+      <a href="https://cnt-mh.github.io/REDEV/SITE2/SDB/344/index.html" target="_blank">🌐 통합페이지바로가기</a>
+    </div>
+    <div class="card sadang300" id="sadang300Card">
+      <h3>사당300번지 모아타운</h3>
+      <div class="badge" id="sadang300Stage">로딩 중...</div>
+     <!-- <div class="section">
+        <h4>📌 전주 이슈</h4>
+        <p id="sadang300Prev">로딩 중...</p>
+      </div> -->
+      <div class="section">
+        <h4>🔥 금주 이슈</h4>
+        <p id="sadang300Curr">로딩 중...</p>
+      </div>
+      <a href="https://cnt-mh.github.io/REDEV/SITE2/SD/300/index.html" target="_blank">🌐 통합페이지바로가기</a>
+    </div>
+
+    
+  </main>
+
+  <footer>
+    © 2025 머핀홀딩스 내부용
+  </footer>
+
+  <script>
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbybMyca3x_BszUiTnq50g-XolayOM_uY-_tjR8-wZvrwkZPixa6qJnAYueHbyfcRDEL/exec";
+
+  fetch(SHEET_URL)
+    .then(res => res.json())
+    .then(data => {
+      data.forEach(item => {
+        const name = item.현장명.replace(/\s|\(|\)|\[|\]/g, "");
+        const stage = item.진행단계.replace(/\n/g, " ");
+        const prev = item.전주이슈.replace(/\n/g, "<br>");
+        const curr = item.금주이슈.replace(/\n/g, "<br>");
+
+        if (name.includes("엑스포")) {
+          document.getElementById("expoStage").innerText = stage;
+          //document.getElementById("expoPrev").innerHTML = prev;
+          document.getElementById("expoCurr").innerHTML = curr;
+        }
+        else if (name.includes("사당12") || name.includes("288")) {
+          document.getElementById("sadang12Stage").innerText = stage;
+          //document.getElementById("sadang12Prev").innerHTML = prev;
+          document.getElementById("sadang12Curr").innerHTML = curr;
+        }
+        else if (name.includes("사당동300") || name.includes("300일대")) {
+          document.getElementById("sadang300Stage").innerText = stage;
+          //document.getElementById("sadang300Prev").innerHTML = prev;
+          document.getElementById("sadang300Curr").innerHTML = curr;
+        }
+        else if (name.includes("신대방3") || name.includes("344")) {
+          document.getElementById("sdb344Stage").innerText = stage;
+         // document.getElementById("sdb344Prev").innerHTML = prev;
+          document.getElementById("sdb344Curr").innerHTML = curr;
+        }
+      });
+    })
+    .catch(err => {
+      console.error("데이터 로딩 오류:", err);
+      document.querySelectorAll("p").forEach(p => p.textContent = "데이터 로딩 실패");
+    });
+  </script>
+</body>
+</html>
