@@ -2,40 +2,40 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>머핀홀딩스 | 통합페이지로그인</title>
+  <title>로그인 | 머핀홀딩스 통합페이지</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== 기본 세팅 ===== */
+    /* ===================== 공통 ===================== */
     body {
       font-family: 'Noto Sans KR', sans-serif;
-      height: 100vh;
       margin: 0;
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      /* 그라데이션 배경 (부드럽게 변화) */
-      background: linear-gradient(-45deg, #0046ff, #8c4eff, #00c2ff, #ff6cf0);
+      background: linear-gradient(-45deg, #0046ff, #8c4eff, #002994, #ff6cf0);
       background-size: 400% 400%;
-      animation: gradientMove 15s ease infinite;
+      animation: gradientMove 12s ease infinite;
+      color: #fff;
+      text-align: center;
     }
 
-    /* 그라데이션 움직임 */
     @keyframes gradientMove {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* ===== 로그인 카드 ===== */
+   /* ===== 로그인 카드 ===== */
     .login-box {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 20px;
       padding: 40px 30px;
       width: 90%;
-      max-width: 420px;
+      max-width: fit-content;
       text-align: center;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(8px);
@@ -47,74 +47,102 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+
     h2 {
-      color: #0033cc;
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.3px;
+	    margin: 0;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #000000;
     }
 
+    /* ===================== 입력창 ===================== */
     input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 1rem;
-      border-radius: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 1rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
     }
 
     input:focus {
       border-color: #0046ff;
-      box-shadow: 0 0 8px rgba(0, 70, 255, 0.25);
+      box-shadow: 0 0 6px rgba(0,70,255,0.25);
       outline: none;
     }
 
     button {
       width: 100%;
-      background: linear-gradient(90deg, #0046ff, #8c4eff);
-      color: white;
+      background: #fff;
+      color: #0046ff;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       padding: 12px;
       font-size: 1rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.3s;
+      margin-top: 10px;
     }
 
     button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+      background: #0046ff;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     .error {
-      color: #ff2e63;
-      margin-top: 0.5rem;
+      color: #ff4444;
+      margin-top: 0.8rem;
       font-size: 0.9rem;
       font-weight: 500;
     }
 
     .footer {
-      margin-top: 2rem;
-      color: #777;
-      font-size: 0.8rem;
+      margin-top: 1.8rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    /* ===================== 로고 반응형 ===================== */
+    .logo {
+      max-width: 35%;
+      height: auto;
+      transition: all 0.3s ease;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .logo { max-width: 45%; }
+    }
+
+    @media (max-width: 480px) {
+      .logo { max-width: 55%; }
+      h2 { font-size: 1.3rem; }
+      input { font-size: 0.95rem; }
     }
   </style>
 </head>
 
 <body>
   <div class="login-box">
-    <h2>머핀홀딩스<br>통합페이지로그인</h2>
+    <img src="http://www.mholdings.co.kr/m/images/logo1.png" alt="머핀홀딩스 로고" class="logo">
+    <h2>개발사업 통합페이지 로그인</h2>
+
     <input type="text" id="username" placeholder="아이디">
     <input type="password" id="password" placeholder="비밀번호">
     <button onclick="login()">로그인</button>
+
     <div class="error" id="error-message"></div>
-    <div class="footer">© 2025 Muffin Holdings Development</div>
+    <div class="footer">© 2025 Muffin Holdings Development Dept</div>
   </div>
 
   <script>
     const validUsers = [
       { id: "mh", pw: "mh" },
-      { id: "cnt", pw: "cnt" }
+      { id: "admin", pw: "muffin2025!" },
+      { id: "dev", pw: "mh1234" }
     ];
 
     function login() {
@@ -123,9 +151,13 @@
       const error = document.getElementById("error-message");
 
       const match = validUsers.find(u => u.id === id && u.pw === pw);
+
       if (match) {
         localStorage.setItem("muffinAuth", "true");
-        window.location.href = "index.html"; // 로그인 성공 시 메인 페이지로 이동
+        document.body.style.opacity = "0";
+        setTimeout(() => {
+          window.location.href = "https://mh-cnt.netlify.app/"; // 로그인 성공 후 이동
+        }, 300);
       } else {
         error.textContent = "아이디 또는 비밀번호가 올바르지 않습니다.";
       }
