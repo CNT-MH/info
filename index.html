@@ -5,7 +5,7 @@
   <title>머핀홀딩스 개발사업 통합페이지</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=3,minimum-scale=1,user-scalable=yes">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="icon" href="https://cnt-mh.github.io/MH/DEV/LOGO/favicon.png">
+  <link rel="icon" href="https://raw.githubusercontent.com/CNT-MH/info/main/logo1.png">
   <style>
     :root {
       --bg:#f7f9fc; --text:#333;
@@ -31,8 +31,8 @@
 <body>
   <header>
     <div class="header-inner">
-      <img src="http://www.mholdings.co.kr/RAD/PEG/logo_17103186357105.png" alt="로고">
-      <span>머핀홀딩스 개발사업 통합페이지</span>
+      <img src="https://raw.githubusercontent.com/CNT-MH/info/main/logo2.png" alt="로고">
+      <span>개발사업 통합페이지</span>
     </div>
   </header>
 
@@ -52,9 +52,23 @@
       <p id="sadang12Curr">금주 이슈 불러오는 중...</p>
       <a href="https://cnt-mh.github.io/REDEV/SITE2/SD/12/index.html" target="_blank">🌐 바로가기</a>
     </div>
+    
+    <div class="card">
+      <h3>신대방3구역 신통</h3>
+      <div class="badge" id="sdb344Stage">로딩 중...</div>
+      <p id="sdb344Curr">금주 이슈 불러오는 중...</p>
+      <a href="https://cnt-mh.github.io/REDEV/SITE2/SDb/344/index.html" target="_blank">🌐 바로가기</a>
+    </div>
+   
+    <div class="card">
+      <h3>사당300 모아타운</h3>
+      <div class="badge" id="sadang300Stage">로딩 중...</div>
+      <p id="sadang300Curr">금주 이슈 불러오는 중...</p>
+      <a href="https://cnt-mh.github.io/REDEV/SITE2/SD/300/index.html" target="_blank">🌐 바로가기</a>
+    </div>
   </main>
 <footer>© 2025 MHoldings Development Dept</footer>
-  
+
   <script>
   document.addEventListener("DOMContentLoaded", () => {
     // 로그인 상태 확인
@@ -77,16 +91,24 @@
       .then(data => {
         data.forEach(item => {
           const name = item.현장명;
-          const curr = item.금주이슈.replace(/\n/g,"<br>");
           const stage = item.진행단계;
+          
+          const curr = item.금주이슈.replace(/\n/g,"<br>");
+    
 
           if(name.includes("엑스포")) {
-            expoCurr.innerHTML = curr;
-            expoStage.textContent = stage;
+             expoStage.textContent = stage;
+             expoCurr.innerHTML = curr;          
           } else if(name.includes("사당12")) {
             sadang12Curr.innerHTML = curr;
             sadang12Stage.textContent = stage;
-          }
+          } else if(name.includes("신대방344")) {
+            sdb344Stage.textContent = stage;
+            sdb344Curr.innerHTML = curr;   }
+            else if(name.includes("사당300")) {            
+            sadang300Stage.textContent = stage;
+            sadang300Curr.innerHTML = curr;
+            }
         });
       });
   });
