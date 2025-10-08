@@ -2,59 +2,62 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>로그인 | 머핀홀딩스 통합페이지</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
-
+  <title>로그인 | 머핀홀딩스 내부 전용</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <style>
-    /* ===================== 공통 ===================== */
     body {
-      font-family: 'Noto Sans KR', sans-serif;
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(-45deg, #0046ff, #8c4eff, #002994, #ff6cf0);
-      background-size: 400% 400%;
-      animation: gradientMove 12s ease infinite;
-      color: #fff;
-      text-align: center;
+      background:#f7f9fc; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      height:100vh; text-align:center;
     }
-
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    h2 { color:#002ea7; margin-bottom:1rem; }
+    input {
+      display:block; margin:0.4rem; padding:0.6rem;
+      border:1px solid #ccc; border-radius:6px; width:200px;
     }
-
-   /* ===== 로그인 카드 ===== */
-    .login-box {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      padding: 40px 30px;
-      width: 90%;
-      max-width: fit-content;
-      text-align: center;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(8px);
-      animation: fadeIn 1.2s ease;
+    button {
+      background:#002ea7; color:white; border:none;
+      padding:0.6rem 1.2rem; border-radius:6px; margin-top:0.5rem;
+      cursor:pointer;
     }
+    button:hover { background:#001e72; }
+    #msg { color:red; margin-top:0.5rem; }
+  </style>
+</head>
+<body>
+  <h2>머핀홀딩스 내부 페이지 로그인</h2>
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to   { opacity: 1; transform: translateY(0); }
+  <input id="id" placeholder="아이디">
+  <input id="pw" type="password" placeholder="비밀번호">
+  <button onclick="login()">로그인</button>
+  <p id="msg"></p>
+
+  <script>
+    // ✅ 허용된 사용자 목록 (필요한 만큼 추가 가능)
+    const USERS = [
+      { id: "mh", pw: "mh", name: "머핀" },
+      { id: "cnt", pw: "cnt", name: "씨앤티" },
+      { id: "guest", pw: "ge
+		  uest", name:"게스트" }
+    ];
+
+    function login(){
+      const id = document.getElementById("id").value.trim();
+      const pw = document.getElementById("pw").value.trim();
+      const msg = document.getElementById("msg");
+
+      const user = USERS.find(u => u.id === id && u.pw === pw);
+      if(user){
+        localStorage.setItem("mh_logged_in", "true");
+        localStorage.setItem("mh_user", user.name);
+        window.location.href = "index.html";
+      } else {
+        msg.textContent = "❌ 아이디 또는 비밀번호가 올바르지 않습니다.";
+      }
     }
-
-
-    h2 {
-	    margin: 0;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #000000;
-    }
-
+  </script>
+</body>
+</html>
     /* ===================== 입력창 ===================== */
     input {
       width: 100%;
