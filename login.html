@@ -84,7 +84,15 @@
   </div>
   
 <footer>©2025 MHoldings Development Dept</footer>
-  <script>
+
+
+	<!-- ✅ Netlify Identity 위젯 불러오기 -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<script>
+  // ✅ 자동 로그인 복원 방지
+  if (window.netlifyIdentity) netlifyIdentity.init({ autologin: false });
+
     const validUsers = [
       { id: "mh", pw: "mh" },
       { id: "admin", pw: "muffin2025!" },
