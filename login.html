@@ -2,40 +2,79 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>로그인 | 머핀홀딩스 내부 전용</title>
+  <title>머핀홀딩스 내부 로그인</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <style>
+    *{box-sizing:border-box;margin:0;padding:0;}
     body {
-      background:#f7f9fc; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-      display:flex; flex-direction:column; justify-content:center; align-items:center;
-      height:100vh; text-align:center;
+      font-family:'Pretendard', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      background:linear-gradient(145deg,#001e72,#0040ff);
+      height:100vh;display:flex;justify-content:center;align-items:center;
+      overflow:hidden;color:white;
     }
-    h2 { color:#002ea7; margin-bottom:1rem; }
+
+    .login-box {
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(14px);
+      border-radius:16px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.3);
+      padding:2.5rem;
+      width:90%;max-width:350px;
+      text-align:center;
+      animation:fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from{opacity:0;transform:translateY(20px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    .logo {
+      width:120px; margin-bottom:0rem;
+    }
+
+    h2 {color:#001e72;font-weight:700;margin-bottom:1.5rem;}
     input {
-      display:block; margin:0.4rem; padding:0.6rem;
-      border:1px solid #ccc; border-radius:6px; width:200px;
+      width:100%;padding:0.7rem 1rem;
+      border:none;border-radius:8px;
+      margin-bottom:0.8rem;
+      font-size:1rem;
     }
+    input:focus{outline:2px solid #0046ff;}
+
     button {
-      background:#002ea7; color:white; border:none;
-      padding:0.6rem 1.2rem; border-radius:6px; margin-top:0.5rem;
-      cursor:pointer;
+      width:100%;padding:0.7rem 1rem;
+      border:none;border-radius:8px;
+      background:#001e72;color:white;
+      font-weight:600;font-size:1rem;
+      cursor:pointer;transition:background 0.25s;
     }
-    button:hover { background:#001e72; }
-    #msg { color:red; margin-top:0.5rem; }
+    button:hover{background:#336dff;}
+
+    #msg {color:#DD0000;margin-top:0.6rem;font-size:0.9rem;}
+    footer {
+      position:absolute;bottom:10px;width:100%;
+      text-align:center;font-size:0.8rem;color:#eaeaea;
+    }
   </style>
 </head>
 <body>
-  <h2>머핀홀딩스 내부 페이지 로그인</h2>
+  <div class="login-box">
+    <img     src="https://raw.githubusercontent.com/CNT-MH/info/main/logo1.png" alt="머핀홀딩스 로고" class="logo">
+    <h2>개발사업 통합페이지</h2>
 
-  <input id="id" placeholder="아이디">
-  <input id="pw" type="password" placeholder="비밀번호">
-  <button onclick="login()">로그인</button>
-  <p id="msg"></p>
+    <input id="id" placeholder="아이디">
+    <input id="pw" type="password" placeholder="비밀번호">
+    <button onclick="login()">로그인</button>
+    <p id="msg"></p>
+  </div>
+
+  <footer>© 2025 Muffin Holdings Internal</footer>
 
   <script>
-    // ✅ 허용된 사용자 목록 (필요한 만큼 추가 가능)
+    // ✅ 여러 계정 등록
     const USERS = [
-      { id: "muffin", pw: "2025dev", name: "관리자" },
+      { id: "mh", pw: "mh", name: "관리자" },
       { id: "expo", pw: "expo123", name: "엑스포 담당" },
       { id: "sadang", pw: "sd12pass", name: "사당12구역" }
     ];
@@ -44,12 +83,12 @@
       const id = document.getElementById("id").value.trim();
       const pw = document.getElementById("pw").value.trim();
       const msg = document.getElementById("msg");
-
       const user = USERS.find(u => u.id === id && u.pw === pw);
+
       if(user){
         localStorage.setItem("mh_logged_in", "true");
         localStorage.setItem("mh_user", user.name);
-        window.location.href = "index.html";
+        window.location.href = "https://cnt-mh.github.io/info/index.html";
       } else {
         msg.textContent = "❌ 아이디 또는 비밀번호가 올바르지 않습니다.";
       }
