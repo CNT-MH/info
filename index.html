@@ -8,23 +8,23 @@
   <link rel="icon" href="https://cnt-mh.github.io/MH/DEV/LOGO/favicon.png">
   <style>
     :root {
-      --bg: #f7f9fc; --text: #333;
-      --font: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --radius: 16px;
+      --bg:#f7f9fc; --text:#333;
+      --font:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      --radius:16px;
     }
-    * {margin:0;padding:0;box-sizing:border-box;font-family:var(--font);}
-    body {background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
-    header {background:#002ea7;color:white;text-align:center;padding:0.8rem;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.15);}
-    header .header-inner {display:flex;align-items:center;justify-content:center;gap:0.5rem;}
-    header img {max-height:38px;}
-    main {flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;padding:1.4rem;}
-    .card {background:white;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.08);padding:1.3rem;border-top:6px solid transparent;transition:transform 0.25s, box-shadow 0.25s;}
-    .card:hover {transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,0.12);}
-    .badge {display:inline-block;background:#e5e9ff;color:#002ea7;font-size:0.8rem;font-weight:600;padding:0.25rem 0.6rem;border-radius:3px;margin-bottom:0.3rem;}
-    .card h3 {margin-bottom:0.5rem;color:#002ea7;}
-    .card a {margin-top:auto;background:#002ea7;color:white;text-decoration:none;padding:0.45rem 0.9rem;border-radius:8px;font-size:0.88rem;}
-    footer {text-align:center;font-size:0.8rem;color:#777;padding:1rem;border-top:1px solid #ddd;background:#fafafa;}
-    button.logout {position:fixed;top:15px;right:15px;padding:0.4rem 0.8rem;border:none;background:#ff4444;color:white;border-radius:6px;cursor:pointer;}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:var(--font);}
+    body{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+    header{background:#002ea7;color:white;text-align:center;padding:0.8rem;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.15);}
+    header .header-inner{display:flex;align-items:center;justify-content:center;gap:0.5rem;}
+    header img{max-height:38px;}
+    main{flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;padding:1.4rem;}
+    .card{background:white;border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.08);padding:1.3rem;border-top:6px solid transparent;transition:transform 0.25s,box-shadow 0.25s;}
+    .card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,0.12);}
+    .badge{display:inline-block;background:#e5e9ff;color:#002ea7;font-size:0.8rem;font-weight:600;padding:0.25rem 0.6rem;border-radius:3px;margin-bottom:0.3rem;}
+    .card h3{margin-bottom:0.5rem;color:#002ea7;}
+    .card a{margin-top:auto;background:#002ea7;color:white;text-decoration:none;padding:0.45rem 0.9rem;border-radius:8px;font-size:0.88rem;}
+    footer{text-align:center;font-size:0.8rem;color:#777;padding:1rem;border-top:1px solid #ddd;background:#fafafa;}
+    button.logout{position:fixed;top:15px;right:15px;padding:0.4rem 0.8rem;border:none;background:#ff4444;color:white;border-radius:6px;cursor:pointer;}
   </style>
 </head>
 
@@ -36,7 +36,7 @@
     </div>
   </header>
 
-  <button class="logout" onclick="netlifyIdentity.logout()">로그아웃</button>
+  <button class="logout">로그아웃</button>
 
   <main>
     <div class="card">
@@ -53,11 +53,24 @@
       <a href="https://cnt-mh.github.io/REDEV/SITE2/SD/12/index.html" target="_blank">🌐 바로가기</a>
     </div>
   </main>
-
-  <footer>© 2025 머핀홀딩스 내부용</footer>
-
-  <!-- ✅ 데이터 불러오기 -->
+<footer>© 2025 MHoldings Development Dept</footer>
+  
   <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // 로그인 상태 확인
+    const isLoggedIn = localStorage.getItem("muffinAuth");
+    if (!isLoggedIn) {
+      window.location.href = "https://cnt-mh.github.io/info/login.html";
+      return;
+    }
+
+    // 로그아웃
+    document.querySelector(".logout").addEventListener("click", () => {
+      localStorage.removeItem("muffinAuth");
+      window.location.href = "https://cnt-mh.github.io/info/login.html";
+    });
+
+    // 데이터 불러오기
     const SHEET_URL = "https://script.google.com/macros/s/AKfycbybMyca3x_BszUiTnq50g-XolayOM_uY-_tjR8-wZvrwkZPixa6qJnAYueHbyfcRDEL/exec";
     fetch(SHEET_URL)
       .then(res => res.json())
@@ -76,37 +89,7 @@
           }
         });
       });
+  });
   </script>
-
-  <!-- ✅ Netlify Identity -->
-
-  <!-- ✅ Netlify Identity -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  if (window.netlifyIdentity) {
-    // 초기화
-    netlifyIdentity.init();
-
-    // 초기 상태 확인 (로그인 안 되어 있으면 로그인 페이지로)
-    netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.location.href = "https://cnt-mh.github.io/info/login.html";
-      }
-    });
-
-    // 로그아웃 시 처리
-    netlifyIdentity.on("logout", () => {
-      window.location.href = "https://cnt-mh.github.io/info/login.html";
- script>   });
-
-    // 로그인 성공 시 유지
-    netlifyIdentity.on("login", () => {
-      // 로그인 상태 그대로 페이지 유지
-      console.log("✅ 로그인 유지 중");
-    });
-  }
-});
-</script>
 </body>
 </html>
