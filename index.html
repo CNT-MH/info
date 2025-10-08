@@ -79,17 +79,34 @@
   </script>
 
   <!-- ✅ Netlify Identity -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      if (window.netlifyIdentity) {
-        netlifyIdentity.on('init', user => {
-          if (!user) window.location.href = 'https://cnt-mh.github.io/info/login.html';
-        });
-        netlifyIdentity.on('logout', () => window.location.href = 'https://cnt-mh.github.io/info/logout.html');
-        netlifyIdentity.init();
+
+  <!-- ✅ Netlify Identity -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  if (window.netlifyIdentity) {
+    // 초기화
+    netlifyIdentity.init();
+
+    // 초기 상태 확인 (로그인 안 되어 있으면 로그인 페이지로)
+    netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.location.href = "https://cnt-mh.github.io/info/login.html";
       }
     });
-  </script>
+
+    // 로그아웃 시 처리
+    netlifyIdentity.on("logout", () => {
+      window.location.href = "https://cnt-mh.github.io/info/login.html";
+ script>   });
+
+    // 로그인 성공 시 유지
+    netlifyIdentity.on("login", () => {
+      // 로그인 상태 그대로 페이지 유지
+      console.log("✅ 로그인 유지 중");
+    });
+  }
+});
+</script>
 </body>
 </html>
