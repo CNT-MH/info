@@ -307,21 +307,31 @@
   </script>
 
 </body>
-    <!-- Netlify Identity Widget -->
+  <!-- Netlify Identity Widget -->
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
 <script>
-  if (window.netlifyIdentity) {
-    netlifyIdentity.on('init', user => {
-      if (!user) {
-        netlifyIdentity.on('login', () => document.location.reload());
-      } else {
-        console.log("✅ 로그인된 사용자:", user.email);
-      }
-    });
-    netlifyIdentity.on('logout', () => document.location.reload());
-    netlifyIdentity.init();
-  }
+  document.addEventListener("DOMContentLoaded", () => {
+    // Netlify Identity 초기화
+    if (window.netlifyIdentity) {
+      netlifyIdentity.on('init', user => {
+        // 로그인 안 된 상태면 logout.html로 리다이렉트
+        if (!user) {
+          window.location.href = '/logout.html';
+        }
+      });
+
+      // 로그인 후 페이지 새로고침 (세션 반영)
+      netlifyIdentity.on('login', () => document.location.reload());
+
+      // 로그아웃 시 logout.html로 이동
+      netlifyIdentity.on('logout', () => {
+        window.location.href = '/logout.html';
+      });
+
+      netlifyIdentity.init();
+    }
+  });
 </script>
 
 </html>
