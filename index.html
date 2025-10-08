@@ -305,5 +305,22 @@
       document.querySelectorAll("p").forEach(p => p.textContent = "데이터 로딩 실패");
     });
   </script>
+  <!-- Netlify Identity Widget -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<script>
+  if (window.netlifyIdentity) {
+    netlifyIdentity.on('init', user => {
+      if (!user) {
+        netlifyIdentity.on('login', () => document.location.reload());
+      } else {
+        console.log("✅ 로그인된 사용자:", user.email);
+      }
+    });
+    netlifyIdentity.on('logout', () => document.location.reload());
+    netlifyIdentity.init();
+  }
+</script>
+
 </body>
 </html>
