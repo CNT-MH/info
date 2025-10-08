@@ -2,8 +2,10 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>머핀홀딩스 내부 로그인</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>로그인 | 머핀홀딩스 개발사업</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
     *{box-sizing:border-box;margin:0;padding:0;}
     body {
@@ -14,12 +16,13 @@
     }
 
     .login-box {
+	
       background:rgba(255,255,255,0.92);
       backdrop-filter:blur(14px);
       border-radius:16px;
       box-shadow:0 6px 20px rgba(0,0,0,0.3);
-      padding:2.5rem;
-      width:90%;max-width:350px;
+      padding:2.5rem 0.5rem;
+      width:80%;max-width:350px;
       text-align:center;
       animation:fadeIn 0.8s ease;
     }
@@ -51,48 +54,87 @@
     }
     button:hover{background:#336dff;}
 
-    #msg {color:#DD0000;margin-top:0.6rem;font-size:0.9rem;}
+    #error-message {color:#DD0000;font-size:0.8rem;}
     footer {
-      position:absolute;bottom:10px;width:100%;
-      text-align:center;font-size:0.8rem;color:#eaeaea;
-    }
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #eaeaea;
+}
   </style>
 </head>
+
 <body>
   <div class="login-box">
     <img     src="https://raw.githubusercontent.com/CNT-MH/info/main/logo1.png" alt="머핀홀딩스 로고" class="logo">
     <h2>개발사업 통합페이지</h2>
 
-    <input id="id" placeholder="아이디">
-    <input id="pw" type="password" placeholder="비밀번호">
-    <button onclick="login()">로그인</button>
-    <p id="msg"></p>
+     <input type="text" id="id" placeholder="아이디">
+	<input type="password" id="pw" placeholder="비밀번호">
+    <button id="login-button">로그인</button>     
+  <div class="error" id="error-message"></div>
+   
+    
+ 
   </div>
-
-  <footer>© 2025 Muffin Holdings Internal</footer>
-
+  
+<footer>© 2025 Muffin Holdings Development Dept</footer>
   <script>
-    // ✅ 여러 계정 등록
-    const USERS = [
-      { id: "mh", pw: "mh", name: "관리자" },
-      { id: "expo", pw: "expo123", name: "엑스포 담당" },
-      { id: "sadang", pw: "sd12pass", name: "사당12구역" }
+    const validUsers = [
+      { id: "mh", pw: "mh" },
+      { id: "admin", pw: "muffin2025!" },
+      { id: "dev", pw: "mh1234" }
     ];
 
-    function login(){
-      const id = document.getElementById("id").value.trim();
-      const pw = document.getElementById("pw").value.trim();
-      const msg = document.getElementById("msg");
-      const user = USERS.find(u => u.id === id && u.pw === pw);
+    function login() {
+      // DOM 요소들을 변수로 선언
+      const idField = document.getElementById("id");
+      const pwField = document.getElementById("pw");
+      const error = document.getElementById("error-message");
 
-      if(user){
-        localStorage.setItem("mh_logged_in", "true");
-        localStorage.setItem("mh_user", user.name);
-        window.location.href = "https://cnt-mh.github.io/info/index.html";
-      } else {
-        msg.textContent = "❌ 아이디 또는 비밀번호가 올바르지 않습니다.";
-      }
-    }
-  </script>
+      // 값 정리
+      const id = idField.value.trim();
+      const pw = pwField.value.trim();
+
+      const match = validUsers.find(u => u.id === id && u.pw === pw);
+
+      if (match) {
+        localStorage.setItem("muffinAuth", "true");
+        document.body.style.opacity = "0";
+        setTimeout(() => {
+          window.location.href = "https://cnt-mh.github.io/info/index.html";
+        }, 300);
+      } else {
+        error.textContent = "아이디 또는 비밀번호가 올바르지 않습니다.";
+        // 선언된 pwField 변수를 사용
+        pwField.value = "";
+        // 옵션: 아이디 입력창에 포커스를 다시 줍니다.
+        idField.focus();
+      }
+    }
+     // DOMContentLoaded: 문서 로드 후 이벤트 리스너를 붙입니다.
+    document.addEventListener('DOMContentLoaded', () => {
+        // 버튼 클릭 이벤트 리스너
+        document.getElementById('login-button').addEventListener('click', login);
+        
+        // 아이디 필드에서 엔터 키 이벤트 리스너 추가 (옵션)
+        document.getElementById('id').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+        
+        // 비밀번호 필드에서 엔터 키 이벤트 리스너
+        document.getElementById('pw').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+    });
+  </script>
 </body>
+
+
 </html>
