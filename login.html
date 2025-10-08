@@ -132,13 +132,21 @@
 
     <input type="text" id="username" placeholder="아이디">
     <input type="password" id="password" placeholder="비밀번호">
-    <button onclick="login()">로그인</button>
+    <button onclick="login()">테스트</button>  
+	<button onclick="netlifyIdentity.open()">🔐로그인</button>
+
 
     <div class="error" id="error-message"></div>
     <div class="footer">© 2025 Muffin Holdings Development Dept</div>
   </div>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script>
+   <script>
+    if(window.netlifyIdentity){
+      netlifyIdentity.on('login', () => window.location.href = 'https://cnt-mh.github.io/info/index.html');
+      netlifyIdentity.init();
+    }
+   </script>
+	<script>
     const validUsers = [
       { id: "mh", pw: "mh" },
       { id: "admin", pw: "muffin2025!" },
