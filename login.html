@@ -9,22 +9,22 @@
   <style>
     *{box-sizing:border-box;margin:0;padding:0;}
     body {
-      font-family:'Pretendard', -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+      font-family:'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background:linear-gradient(145deg,#001e72,#0040ff);
       height:100vh;display:flex;justify-content:center;align-items:center;
       overflow:hidden;color:white;
     }
 
     .login-box {
-	
       background:rgba(255,255,255,0.92);
       backdrop-filter:blur(14px);
       border-radius:16px;
       box-shadow:0 6px 20px rgba(0,0,0,0.3);
-      padding:2.5rem 0.5rem;
+      padding:2.5rem 1rem;
       width:80%;max-width:350px;
       text-align:center;
       animation:fadeIn 0.8s ease;
+      color:#001e72;
     }
 
     @keyframes fadeIn {
@@ -32,11 +32,17 @@
       to{opacity:1;transform:translateY(0);}
     }
 
-    .logo {
-      width:120px; margin-bottom:0rem;
+    @keyframes shake {
+      0%,100%{transform:translateX(0)}
+      25%{transform:translateX(-8px)}
+      50%{transform:translateX(8px)}
+      75%{transform:translateX(-6px)}
     }
 
-    h2 {color:#001e72;font-weight:700;margin-bottom:1.5rem;}
+    .shake{animation:shake 0.35s ease;}
+
+    .logo {width:120px;margin-bottom:0.3rem;}
+    h2 {color:#001e72;font-weight:700;margin-bottom:1.2rem;}
     input {
       width:100%;padding:0.7rem 1rem;
       border:none;border-radius:8px;
@@ -54,98 +60,75 @@
     }
     button:hover{background:#336dff;}
 
-    #error-message {color:#DD0000;font-size:0.8rem;}
+    #error-message {
+      color:#DD0000;font-size:0.8rem;opacity:0;
+      transition:opacity 0.3s;
+      height:1rem;margin-top:0.4rem;
+    }
 
-	  footer {
-  position: fixed;
-  bottom: 10px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 0.8rem;
-  color: #eaeaea;
-	  }
-    
+    #error-message.show{opacity:1;}
+
+    footer {
+      position: fixed;bottom: 10px;left: 0;width: 100%;
+      text-align:center;font-size:0.8rem;color:#eaeaea;
+    }
   </style>
 </head>
 
 <body>
-  <div class="login-box">
-    <img     src="https://raw.githubusercontent.com/CNT-MH/info/main/logo1.png" alt="머핀홀딩스 로고" class="logo">
+  <div class="login-box" id="loginBox">
+    <img src="https://raw.githubusercontent.com/CNT-MH/info/main/logo1.png" alt="머핀홀딩스 로고" class="logo">
     <h2>개발사업 통합페이지</h2>
 
-     <input type="text" id="id" placeholder="아이디">
-	<input type="password" id="pw" placeholder="비밀번호">
-    <button id="login-button">로그인</button>     
-  <div class="error" id="error-message"></div>
-   
-    
- 
+    <input type="text" id="id" placeholder="아이디">
+    <input type="password" id="pw" placeholder="비밀번호">
+    <button id="login-button">로그인</button>     
+    <div id="error-message"></div>
   </div>
-  
-<footer>©2025 MHoldings Development Dept</footer>
 
+  <footer>© 2025 MHoldings Development Dept</footer>
 
-	<!-- ✅ Netlify Identity 위젯 불러오기 -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
-<script>
-  // ✅ 자동 로그인 복원 방지
-  if (window.netlifyIdentity) netlifyIdentity.init({ autologin: false });
-
+  <script>
     const validUsers = [
       { id: "mh", pw: "mh" },
       { id: "admin", pw: "muffin2025!" },
       { id: "dev", pw: "mh1234" }
     ];
 
+    const loginBox = document.getElementById("loginBox");
+    const errorMsg = document.getElementById("error-message");
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.classList.add("show");
+      loginBox.classList.add("shake");
+      setTimeout(() => loginBox.classList.remove("shake"), 400);
+      setTimeout(() => errorMsg.classList.remove("show"), 5000);
+    }
+
     function login() {
-      // DOM 요소들을 변수로 선언
-      const idField = document.getElementById("id");
-      const pwField = document.getElementById("pw");
-      const error = document.getElementById("error-message");
+      const id = document.getElementById("id").value.trim();
+      const pw = document.getElementById("pw").value.trim();
+      const match = validUsers.find(u => u.id === id && u.pw === pw);
 
-      // 값 정리
-      const id = idField.value.trim();
-      const pw = pwField.value.trim();
+      if (match) {
+        localStorage.setItem("muffinAuth", "true");
+        document.body.style.opacity = "0";
+        setTimeout(() => {
+          window.location.href = "https://cnt-mh.github.io/info/index.html";
+        }, 300);
+      } else {
+        showError("아이디 또는 비밀번호가 올바르지 않습니다.");
+        document.getElementById("pw").value = "";
+        document.getElementById("id").focus();
+      }
+    }
 
-      const match = validUsers.find(u => u.id === id && u.pw === pw);
-
-      if (match) {
-        localStorage.setItem("muffinAuth", "true");
-        document.body.style.opacity = "0";
-        setTimeout(() => {
-          window.location.href = "https://cnt-mh.github.io/info/index.html";
-        }, 300);
-      } else {
-        error.textContent = "아이디 또는 비밀번호가 올바르지 않습니다.";
-        // 선언된 pwField 변수를 사용
-        pwField.value = "";
-        // 옵션: 아이디 입력창에 포커스를 다시 줍니다.
-        idField.focus();
-      }
-    }
-     // DOMContentLoaded: 문서 로드 후 이벤트 리스너를 붙입니다.
     document.addEventListener('DOMContentLoaded', () => {
-        // 버튼 클릭 이벤트 리스너
-        document.getElementById('login-button').addEventListener('click', login);
-        
-        // 아이디 필드에서 엔터 키 이벤트 리스너 추가 (옵션)
-        document.getElementById('id').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                login();
-            }
-        });
-        
-        // 비밀번호 필드에서 엔터 키 이벤트 리스너
-        document.getElementById('pw').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                login();
-            }
-        });
+      document.getElementById('login-button').addEventListener('click', login);
+      document.getElementById('id').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+      document.getElementById('pw').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
     });
-  </script>
+  </script>
 </body>
-
-
 </html>
