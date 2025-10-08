@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>로그아웃 | 머핀홀딩스 통합페이지</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===================== 공통 스타일 ===================== */
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      background: linear-gradient(-45deg, #0046ff, #8c4eff, #00c2ff, #ff6cf0);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      color: #fff;
+      text-align: center;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ===================== 헤더 ===================== */
+    header {
+      background:#002ea79e;
+      color:white;
+      text-align:center;
+      padding:0.8rem 1rem;
+      font-weight:700;
+      box-shadow:0 2px 6px rgba(0,0,0,0.15);
+      position:sticky;
+      top:0;
+      width:100%;
+      z-index:10;
+    }
+
+    .header-inner {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:0.6rem;
+    }
+
+    header .logo {
+      max-height:40px;
+      height:auto;
+      width:auto;
+    }
+
+    .header-title {
+      font: initial;
+      font-size:1.2rem;
+      letter-spacing:-0.3px;
+    }
+
+    /* ===================== 본문 ===================== */
+    main {
+      flex:1;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      width:100%;
+      padding:2rem 1rem;
+      box-sizing:border-box;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 30px;
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      color: #eee;
+      line-height:1.6;
+    }
+
+    button {
+      background: #ffffff;
+      color: #0046ff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    button:hover {
+      background: #0046ff;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.8);
+      padding: 1rem 0;
+    }
+
+    /* 모바일 대응 */
+    @media (max-width: 576px) {
+      h2 { font-size: 1.3rem; }
+      p { font-size: 0.9rem; }
+      .box { padding: 30px 20px; }
+      .header-title { font-size: 1rem; }
+      header .logo { max-height: 34px; }
+    }
+	
+
+
+/* ✅ 로고 이미지 비율 기반 설정 */
+.logo {
+  max-width: 20%;        /* 화면(또는 부모 요소) 너비의 20% 이내로 제한 */
+  height: auto;           /* 비율 유지 */
+  width: auto;            /* 자동 계산 */
+  transition: all 0.3s ease;
+}
+
+/* 📱 반응형 - 중간 크기 화면 */
+@media (max-width: 768px) {
+  .logo {
+    max-width: 25%;      /* 태블릿에서는 조금 더 크게 */
+  }
+}
+
+/* 📱 모바일 화면 */
+@media (max-width: 480px) {
+  .header-inner {
+    flex-direction: initial;
+    text-align: center;
+  }
+  .logo {
+    max-width: 40%;      /* 스마트폰에서는 헤더 폭의 40%까지 확대 */
+  }
+}
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <img src="http://www.mholdings.co.kr/RAD/PEG/logo_17103186357105.png" alt="머핀홀딩스 로고" class="logo">
+      <span class="header-title">개발사업 통합페이지</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="box">
+      <h2>로그아웃되었습니다</h2>
+      <p>보안을 위해 세션이 종료되었습니다.<br>다시 로그인하려면 아래 버튼을 눌러주세요.</p>
+      <button onclick="goLogin()">로그인 페이지로 이동</button>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Muffin Holdings Development
+  </footer>
+
+  <script>
+    function goLogin() {
+      window.location.href ="https://cnt-mh.github.io/info/login.html";
+    }
+  </script>
+</body>
+</html>
