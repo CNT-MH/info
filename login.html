@@ -137,7 +137,7 @@
     <div class="error" id="error-message"></div>
     <div class="footer">© 2025 Muffin Holdings Development Dept</div>
   </div>
-
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script>
     const validUsers = [
       { id: "mh", pw: "mh" },
@@ -156,7 +156,7 @@
         localStorage.setItem("muffinAuth", "true");
         document.body.style.opacity = "0";
         setTimeout(() => {
-          window.location.href = "https://mh-cnt.netlify.app/"; // 로그인 성공 후 이동
+          window.location.href = "https://cnt-mh.github.io/info/index.html"; // 로그인 성공 후 이동
         }, 300);
       } else {
         error.textContent = "아이디 또는 비밀번호가 올바르지 않습니다.";
