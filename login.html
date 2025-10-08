@@ -35,10 +35,9 @@
   <script>
     // ✅ 허용된 사용자 목록 (필요한 만큼 추가 가능)
     const USERS = [
-      { id: "mh", pw: "mh", name: "머핀" },
-      { id: "cnt", pw: "cnt", name: "씨앤티" },
-      { id: "guest", pw: "ge
-		  uest", name:"게스트" }
+      { id: "muffin", pw: "2025dev", name: "관리자" },
+      { id: "expo", pw: "expo123", name: "엑스포 담당" },
+      { id: "sadang", pw: "sd12pass", name: "사당12구역" }
     ];
 
     function login(){
@@ -53,124 +52,6 @@
         window.location.href = "index.html";
       } else {
         msg.textContent = "❌ 아이디 또는 비밀번호가 올바르지 않습니다.";
-      }
-    }
-  </script>
-</body>
-</html>
-    /* ===================== 입력창 ===================== */
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-
-    input:focus {
-      border-color: #0046ff;
-      box-shadow: 0 0 6px rgba(0,70,255,0.25);
-      outline: none;
-    }
-
-    button {
-      width: 100%;
-      background: #fff;
-      color: #0046ff;
-      border: none;
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background: #0046ff;
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-
-    .error {
-      color: #ff4444;
-      margin-top: 0.8rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .footer {
-      margin-top: 1.8rem;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.85);
-    }
-
-    /* ===================== 로고 반응형 ===================== */
-    .logo {
-      max-width: 35%;
-      height: auto;
-      transition: all 0.3s ease;
-      margin-bottom: 1rem;
-    }
-
-    @media (max-width: 768px) {
-      .logo { max-width: 45%; }
-    }
-
-    @media (max-width: 480px) {
-      .logo { max-width: 55%; }
-      h2 { font-size: 1.3rem; }
-      input { font-size: 0.95rem; }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="login-box">
-    <img src="http://www.mholdings.co.kr/m/images/logo1.png" alt="머핀홀딩스 로고" class="logo">
-    <h2>개발사업 통합페이지 로그인</h2>
-
-    <input type="text" id="username" placeholder="아이디">
-    <input type="password" id="password" placeholder="비밀번호">
-    <button onclick="login()">테스트</button>  
-	<!--<button onclick="netlifyIdentity.open()">🔐로그인</button>-->
-
-
-    <div class="error" id="error-message"></div>
-    <div class="footer">© 2025 Muffin Holdings Development Dept</div>
-  </div>
-<!--  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-   <script>
-    if(window.netlifyIdentity){
-      netlifyIdentity.on('login', () => window.location.href = 'https://cnt-mh.github.io/info/index.html');
-      netlifyIdentity.init();
-    }
-   </script>-->
-	<script>
-    const validUsers = [
-      { id: "mh", pw: "mh" },
-      { id: "admin", pw: "muffin2025!" },
-      { id: "dev", pw: "mh1234" }
-    ];
-
-    function login() {
-      const id = document.getElementById("username").value.trim();
-      const pw = document.getElementById("password").value.trim();
-      const error = document.getElementById("error-message");
-
-      const match = validUsers.find(u => u.id === id && u.pw === pw);
-
-      if (match) {
-        localStorage.setItem("muffinAuth", "true");
-        document.body.style.opacity = "0";
-        setTimeout(() => {
-          window.location.href = "https://cnt-mh.github.io/info/index.html"; // 로그인 성공 후 이동
-        }, 300);
-      } else {
-        error.textContent = "아이디 또는 비밀번호가 올바르지 않습니다.";
       }
     }
   </script>
