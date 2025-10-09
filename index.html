@@ -173,6 +173,29 @@
   main{ grid-template-columns:1fr; padding:1rem; }
       .card{ padding:0.5rem 0.5rem; }
 }
+  
+@media (max-width: 360px) {
+  .header-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.3rem;
+  }
+  header img { max-height: 30px; }
+  .header-title { font-size: 0.75rem; }
+  main { grid-template-columns: 1fr; padding: 0.7rem; }
+  .card { padding: 0.4rem; font-size: 0.85rem; }
+  .card h3 { font-size: 1rem; line-height: 1.3; }
+  .badge { font-size: 0.7rem; }
+  button.logout { top: 8px; right: 8px; padding: 0.3rem 0.6rem; font-size: 0.7rem; }
+}
+  
+  @media (max-width: 768px) {
+  header { font-size: 1rem; padding: 0.7rem; }
+  .header-inner { gap: 0.6rem; }
+  main { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); padding: 1.2rem; }
+  .card { padding: 1rem; }
+  .card h3 { font-size: 1.1rem; }
+}
 
   
     button.logout{position:fixed;top:15px;right:15px;padding:0.4rem 0.8rem;border:none;background:#ff4444;color:white;border-radius:6px;cursor:pointer;}
@@ -249,7 +272,7 @@
       <a href="https://cnt-mh.github.io/REDEV/SITE2/SD/300/index.html" target="_blank">🌐 통합페이지바로가기</a>
     </div>
   </main>
-<footer>© 2025 MHoldings Development Dept</footer>
+<footer>© 2025 MHoldings Dev. Dept.</footer>
 
   <script>
   
