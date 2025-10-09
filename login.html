@@ -69,13 +69,21 @@
     #error-message.show{opacity:1;}
 
     footer {
-      position: fixed;bottom: 10px;left: 0;width: 100%;
-      text-align:center;font-size:0.8rem;color:#eaeaea;
-    }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #eaeaea;
+  padding: 0.5rem 0;
+  background: transparent;
+}
   </style>
 </head>
 
-<body>
+<body> 
+  
   <div class="login-box" id="loginBox">
     <img src="https://raw.githubusercontent.com/CNT-MH/info/main/logo1.png" alt="머핀홀딩스 로고" class="logo">
     <h2>개발사업 통합페이지</h2>
@@ -86,7 +94,8 @@
     <div id="error-message"></div>
   </div>
 
-  <footer>© 2025 MHoldings Development Dept</footer>
+  <footer>© 2025 MHoldings Dev. Dept.</footer>
+
 
   <script>
     const validUsers = [
