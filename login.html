@@ -100,11 +100,11 @@
   <script>
     const validUsers = [
       { id: "mh", pw: "mh" },
-      { id: "정성훈", pw: "정성훈" },
-      { id: "유리", pw: "유리" }
-      { id: "이대성", pw: "이대성" }
-      { id: "이재호", pw: "이재호" }
-      { id: "", pw: "" }
+    //  { id: "정성훈", pw: "mh00" },
+      { id: "유리", pw: "mh00" },
+      { id: "이대성", pw: "mh00" },
+      { id: "이재호", pw: "mh00" },
+   //   { id: "윤지서", pw: "mh00" }
     ];
 
     const loginBox = document.getElementById("loginBox");
@@ -125,6 +125,8 @@
 
       if (match) {
         localStorage.setItem("muffinAuth", "true");
+        localStorage.setItem("muffinUserName", id);
+        
         document.body.style.opacity = "0";
         setTimeout(() => {
           window.location.href = "https://cnt-mh.github.io/info/index.html";
