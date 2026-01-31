@@ -4,357 +4,159 @@
   <meta charset="UTF-8">
   <title>머핀홀딩스 개발사업 통합페이지</title>
   <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=3,minimum-scale=1,user-scalable=yes">
-  <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="https://raw.githubusercontent.com/CNT-MH/info/main/MH.png">
-    <!-- ✅ 썸네일(미리보기 이미지) 지정 -->
-  <meta property="og:title" content="머핀홀딩스 개발사업 통합페이지">
-  <meta property="og:description" content="머핀홀딩스 개발사업 통합 운영 페이지">
-  <meta property="og:image" content="https://raw.githubusercontent.com/CNT-MH/info/main/MH.png">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://cnt-mh.github.io/info/index.html">  
   <style>
     :root {
-      --bg:#f7f9fc; 
-      --text:#333;
-      --font:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-      --radius:16px;
+      --bg:#f0f2f5; 
+      --text:#1a1a1a;
+      --primary:#002ea7;
+      --font:'Pretendard',-apple-system,sans-serif;
+      --radius:14px;
     }
-    *{margin:0;padding:0;
-      box-sizing:border-box;
-      font-family:var(--font);}
-    body{
-      background:var(--bg);
-      color:var(--text);
-      min-height:100vh;
-      display:flex;flex-direction:column;}
-    header{background:#002ea7;color:white;text-align:center;padding:0.8rem 1rem;
-      font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.15);
-      position:sticky;top:0;z-index:10;
-      font-size:1.2rem;  letter-spacing:-0.3px;}
-      header img {
-          max-height:40px;        /* ✅ 헤더 높이에 따라 자동 조정 */
-          height:auto;
-          width:auto;
-        }
-
-        .header-title {
-           font: initial;
-          font-size:1.2rem;
-          letter-spacing:-0.3px;
-        }
-
-    header .header-inner{display:flex;align-items:center;justify-content:center;gap:0.5rem;}
-   /*header img{max-height:38px;}*/
-    main{flex:1;display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;padding:1.4rem;}
-
-    .card{background:white;
-      border-radius:var(--radius);box-shadow:0 4px 12px rgba(0,0,0,0.08);
-      padding:1.3rem 1.5rem;
-      border-top:6px solid transparent;
-      transition:transform 0.25s,
-      box-shadow 0.25s;     
-      display:flex; flex-direction:column;
+    *{margin:0;padding:0; box-sizing:border-box; font-family:var(--font);}
+    body{ background:var(--bg); color:var(--text); min-height:100vh; }
+    /* ✅ 헤더 2행 배치 스타일 */
+    header {
+      background: var(--primary);
+      color: white;
+      padding: 1.2rem 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .card:hover{transform:translateY(-4px);
-      box-shadow:0 6px 16px rgba(0,0,0,0.12);}
-    .card h3{margin-bottom:0.5rem;
-      font-size:1.1rem;
-      line-height:1.4; word-break:keep-all;
+    .header-inner {
+      display: flex;
+      flex-direction: column; /* 2행 세로 배치 */
+      align-items: center;    /* 중앙 정렬 */
+      gap: 0.6rem;            /* 로고와 텍스트 사이 간격 */
     }
-   .card a {
-    align-self: auto;
-      margin-top:auto;
-      background:#002ea7;
-      color:white;
-      text-decoration:none;
-      padding:0.45rem 0.9rem;
-      border-radius:8px;
-      font-size:0.88rem;
+    header img {
+      max-height: 36px;
+      width: auto;
     }
-
-    .badge{display:inline-block;
-      background: var(--badge-bg, #e5e9ff);  /* 개별 색상 없을 때 기본색 */
-      color: var(--badge-text, #002ea7);
-                  font-size: 0.8rem;
-                  font-weight: 600;
-                  padding: 0.25rem 0.6rem;
-                  border-radius: 3px;
-                  margin-bottom: 0.3rem;
-                  transition: all 0.3s ease;
-                }
-
-
-    .section {
-      margin-bottom:1rem;
-      padding:0.3rem 0.4rem;
-      border-radius:5px;
-      background:#f8f9fb;
-    }
-    .section h4 {
-      font-size:0.9rem;
-      margin-bottom:0.4rem;
-      color:#555;
-    }
-    .section p {
-      font-size:0.8rem;
-      line-height:1.45;
-      white-space:pre-line;
-    }
-
-    footer{text-align:center;
-      font-size:0.8rem;
-      color:#777;
-      padding:1rem;
-      border-top:1px solid #ddd;
-      background:#fafafa;}
-
-
-    /* 색상 테마 */
-    /* === 엑스포 재건툭 색상 테마 === */
-        .expo {
-          border-top-color: #0046ff;
-          --badge-bg: #dddddd66;    /* 배지 배경색 */
-          --badge-text: #002ea7;  /* 배지 글자색 */
-        }
-        .expo h3 { color:#002ea7; }
-        .expo.card a {
-                  background:#e5e9ff;    /* 버튼 배경색 */
-                  color:#002ea7;           /* 버튼 글자색 */
-                }
-        .expo.card a:hover {
-                  background:#0046ff;  
-                  color:white;  /* hover  */
-                }
-
-   /* === 사당300 모아타운  색상 테마 === */
-        .sadang300 {
-          border-top-color: #00a78e;
-          --badge-bg: #dddddd66;
-          --badge-text: #005346;
-        }
-        .sadang300 h3 { color:#005346; }
-        .sadang300.card a {
-                  background:#00a78e26;    /* 버튼 배경색 */
-                  color:#005346;           /* 버튼 글자색 */
-                }
-        .sadang300.card a:hover {
-                  background:#00a78e;  
-                  color: white ;  /* hover  */
-                }
-
-
-   /* === 사당12,신대방3 신통  색상 테마 === */
-        .sadang12, .sdb344,  .yd7 {
-          border-top-color: #8c4eff;
-          --badge-bg: #dddddd66;
-          --badge-text: #330092;
-        }
-
-        .sadang12 h3, .sdb344 h3,  .yd7 h3 { color:#330092; }
-        .sadang12.card a, .sdb344.card a, .yd7.card a {
-                  background:#8e5ee84a;    /* 버튼 배경색 */
-                  color:#330092;           /* 버튼 글자색 */
-                }
-        .sadang12.card a:hover , .sdb344.card a:hover , yd7.card a:hover {
-                  background:#8c4eff;  
-                  color: white;  /* hover  */
-                }
-
-
-/* 📱 모바일 대응 */
-@media(max-width:480px){
-  .header-inner {
-
-    flex-direction:column;
-    text-align:center;
-  }
-  header .logo {
-    max-height:34px;
-  }
-  .header-title {
-    font: initial;
-    font-size:0.8rem;
-  }
-  main{ grid-template-columns:1fr; padding:1rem; }
-      .card{ padding:0.5rem 0.5rem; }
+	
+    /* ✅ 타이틀 우측 정렬 설정 */
+.header-title {
+  width: 100%;            /* 부모 너비를 가득 채움 */
+  text-align: right;      /* 텍스트를 오른쪽으로 정렬 */
+  font-size: 0.95rem;     /* 2행 텍스트 크기 최적화 */
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-top: 0.4rem;
+  opacity: 0.9;
 }
 
-@media (max-width: 360px) {
-  .header-inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.3rem;
-  }
-  header img { max-height: 30px; }
-  .header-title { font-size: 0.75rem; }
-  main { grid-template-columns: 1fr; padding: 0.7rem; }
-  .card { padding: 0.4rem; font-size: 0.85rem; }
-  .card h3 { font-size: 1rem; line-height: 1.3; }
-  .badge { font-size: 0.7rem; }
-  button.logout { top: 8px; right: 8px; padding: 0.3rem 0.6rem; font-size: 0.7rem; }
+/* 모바일 대응 */
+@media(max-width:480px) {
+  header { padding: 0.8rem 1rem; }
+  .header-title { font-size: 0.85rem; }
 }
 
-  @media (max-width: 768px) {
-  header { font-size: 1rem; padding: 0.7rem; }
-  .header-inner { gap: 0.6rem; }
-  main { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); padding: 1.2rem; }
-  .card { padding: 1rem; }
-  .card h3 { font-size: 1.1rem; }
-}
+    main{display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:1.5rem; padding:1.5rem;}
 
+    .card{background:white; border-radius:var(--radius); box-shadow:0 4px 20px rgba(0,0,0,0.05); overflow:hidden; display:flex; flex-direction:column; border-top:6px solid #ccc;}
+    .card-header{padding:1.2rem 1.2rem 0.5rem;}
+    .card h3{font-size:1.15rem; color:#002ea7; margin-bottom:0.5rem;}
+    
+    /* 섹션 스타일 */
+    .content-box{padding:0 1.2rem 1.2rem; flex:1;}
+    .section{margin-top:0.8rem; padding:0.8rem; border-radius:8px; background:#f8f9fc;}
+    .section h4{font-size:0.85rem; color:#555; margin-bottom:0.4rem; display:flex; align-items:center; gap:5px;}
+    .section p{font-size:0.82rem; line-height:1.6; white-space:pre-line; color:#333;}
+    
+    /* 배지 및 버튼 */
+    .badge{display:inline-block; font-size:0.75rem; font-weight:700; padding:3px 8px; border-radius:4px; margin-bottom:8px;}
+    .btn-link{display:block; background:var(--primary); color:white; text-align:center; text-decoration:none; padding:0.8rem; font-size:0.9rem; font-weight:600;}
 
-    button.logout{position:fixed;top:15px;right:15px;padding:0.4rem 0.8rem;border:none;background:#ff4444;color:white;border-radius:6px;cursor:pointer;}
+    /* 현장별 테마 */
+    .theme-blue{border-top-color:#002ea7;}
+    .theme-purple{border-top-color:#8c4eff;}
+    .theme-green{border-top-color:#00a78e;}
+    .theme-orange{border-top-color:#ff6b00;}
+
+    footer{text-align:center; padding:2rem; font-size:0.8rem; color:#888;}
+    .logout{position:fixed; bottom:20px; right:20px; background:#ff4444; color:white; border:none; padding:10px 15px; border-radius:30px; cursor:pointer; font-weight:bold; box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:100;}
+
+    @media(max-width:480px){ main{padding:1rem; grid-template-columns:1fr;} }
   </style>
 </head>
-
 <body>
+
   <header>
-    <div class="header-inner">
-      <img src="https://raw.githubusercontent.com/CNT-MH/info/main/logo2.png" alt="로고">
-      <span class="header-title">개발사업 통합페이지</span>
-    </div>
-  </header>
+  <div class="header-inner">
+    <img src="https://raw.githubusercontent.com/CNT-MH/info/main/logo2.png" alt="로고">
+    <span class="header-title">개발사업 통합 운영 페이지</span>
+  </div>
+</header>
 
- <button class="logout">로그아웃</button>
+<button class="logout" onclick="location.href='https://cnt-mh.github.io/info/login.html'">로그아웃</button>
 
-  <main>
- <!-- 카드 개별 컨트롤 가능 (고정 구조) -->
-    <div class="card expo" id="expoCard">
-      <h3>엑스포 아파트 재건축</h3>
-      <div class="badge" id="expoStage">로딩 중...</div>
-       <!--  <div class="section">
-        <h4>📌 전주 이슈</h4>
-        <p id="expoPrev">로딩 중...</p>
-      </div> -->
-      <div class="section">
-        <h4>🔥 금주 이슈</h4>
-        <p id="expoCurr">로딩 중...</p>
-      </div>
-      <a href="https://cnt-mh.github.io/MH/DEV/APT/EXPO/index.html" target="_blank"> 🌐 통합페이지바로가기</a>
-    </div>
-
-    <div class="card yd7" id="yd7Card">
-      <h3>용두7구역 신통</h3>
-      <div class="badge" id="yd7Stage">로딩 중...</div>
-      <!--<div class="section">
-        <h4>📌 전주 이슈</h4>
-        <p id="yd7Prev">로딩 중...</p>
-      </div>-->
-      <div class="section">
-        <h4>🔥 금주 이슈</h4>
-        <p id="yd7Curr">로딩 중...</p>
-      </div>
-      <a href="https://cnt-mh.github.io/REDEV/SITE2/YD/7/index.html" target="_blank">🌐 통합페이지바로가기</a>
-    </div>
-
-    <div class="card sadang12" id="sadang12Card">
-      <h3>사당12구역 신통</h3>
-      <div class="badge" id="sadang12Stage">로딩 중...</div>
-      <!--<div class="section">
-        <h4>📌 전주 이슈</h4>
-        <p id="sadang12Prev">로딩 중...</p>
-      </div>-->
-      <div class="section">
-        <h4>🔥 금주 이슈</h4>
-        <p id="sadang12Curr">로딩 중...</p>
-      </div>
-      <a href="https://cnt-mh.github.io/REDEV/SITE2/SD/12/index.html" target="_blank">🌐 통합페이지바로가기</a>
-    </div>
-
-
-     <div class="card sdb344" id="sdb344Card">
-      <h3>신대방3구역 신통</h3>
-      <div class="badge" id="sdb344Stage">로딩 중...</div>
-     <!-- <div class="section">
-        <h4>📌 전주 이슈</h4>
-        <p id="sdb344Prev">로딩 중...</p>
-      </div>-->
-      <div class="section">
-        <h4>🔥 금주 이슈</h4>
-        <p id="sdb344Curr">로딩 중...</p>
-      </div>
-      <a href="https://cnt-mh.github.io/REDEV/SITE2/SDB/344/index.html" target="_blank">🌐 통합페이지바로가기</a>
-    </div>
-
-
-    <div class="card sadang300" id="sadang300Card">
-      <h3>사당300번지 모아타운</h3>
-      <div class="badge" id="sadang300Stage">로딩 중...</div>
-     <!-- <div class="section">
-        <h4>📌 전주 이슈</h4>
-        <p id="sadang300Prev">로딩 중...</p>
-      </div> -->
-      <div class="section">
-        <h4>🔥 금주 이슈</h4>
-        <p id="sadang300Curr">로딩 중...</p>
-      </div>
-      <a href="https://cnt-mh.github.io/REDEV/SITE2/SD/300/index.html" target="_blank">🌐 통합페이지바로가기</a>
-    </div>
+<main id="cardContainer">
   </main>
-<footer>© 2025 MHoldings Dev. Dept.</footer>
+
+<footer>© 2026 MHoldings Development Dept.</footer>
 
 <script>
+// 현장 리스트 설정 (현장명 키워드 및 테마)
+const sites = [
+  { id: "expo", keywords: ["엑스포"], title: "대전 엑스포아파트 재건축", theme: "theme-blue" },
+  { id: "sd12", keywords: ["사당12", "사당동288"], title: "사당12구역 신통", theme: "theme-purple" },
+  { id: "sdb3", keywords: ["신대방3", "신대방344"], title: "신대방3구역 신통", theme: "theme-purple" },
+  { id: "yd7", keywords: ["용두7"], title: "용두7구역 신통", theme: "theme-purple" },
+  { id: "yd3", keywords: ["용두3"], title: "용두3구역 재개발", theme: "theme-purple" },
+  { id: "sd300", keywords: ["사당동300", "300일대"], title: "사당300번지 모아타운", theme: "theme-green" },
+  { id: "sangri", keywords: ["상리"], title: "조치원 상리 1·2지구", theme: "theme-orange" },
+  { id: "ujb", keywords: ["의정부", "맑은물"], title: "의정부 맑은물 재개발", theme: "theme-orange" },
+  { id: "michu", keywords: ["미추홀", "부성"], title: "미추홀 부성로얄 재개발", theme: "theme-blue" }
+];
+
 document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("cardContainer");
+  
+  // 초기 카드 생성 (로딩 상태)
+  sites.forEach(site => {
+    container.innerHTML += `
+      <div class="card ${site.theme}" id="card-${site.id}">
+        <div class="card-header">
+          <div class="badge" style="background:#eee;">진행단계 로딩중</div>
+          <h3>${site.title}</h3>
+        </div>
+        <div class="content-box">
+          <div class="section"><h4>📄 전주 보고사항</h4><p class="prev">데이터를 불러오는 중...</p></div>
+          <div class="section"><h4>✅ 업무 진행 상황</h4><p class="res">데이터를 불러오는 중...</p></div>
+          <div class="section"><h4>🔥 금주 예정사항</h4><p class="curr">데이터를 불러오는 중...</p></div>
+          <div class="section"><h4>📌 기타 확인사항</h4><p class="etc">데이터를 불러오는 중...</p></div>
+        </div>
+        <a href="#" class="btn-link">상세페이지 이동</a>
+        </div>
+      </div>`;
+  });
 
-  // ✅ 인증 가드
-  const isLoggedIn = localStorage.getItem("muffinAuth");
-  if (isLoggedIn !== "true") {
-    window.location.href = "https://cnt-mh.github.io/info/login.html";
-    return;
-  }
-
-  // ✅ 로그아웃 기능
-  const logoutBtn = document.querySelector(".logout");
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("muffinAuth");
-      window.location.href = "https://cnt-mh.github.io/info/login.html";
-    });
-  }
-
-  // ✅ 구글 시트 JSON 불러오기
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbybMyca3x_BszUiTnq50g-XolayOM_uY-_tjR8-wZvrwkZPixa6qJnAYueHbyfcRDEL/exec";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbykMwvx3iBw36JaLX57rPR07BKHZhYLBLuEmIE5g4VtdcgToQbHZ2fRTjHEsaJfZBQS/exec";
 
   fetch(SHEET_URL)
     .then(res => res.json())
     .then(data => {
       data.forEach(item => {
-        const name = item.현장명.replace(/\s|\(|\)|\[|\]/g, "");
-        const stage = item.진행단계.replace(/\n/g, " ");
-        const curr = item.금주이슈.replace(/\n/g, "<br>");
-
-        if (name.includes("엑스포")) {
-          document.getElementById("expoStage").innerText = stage;
-          document.getElementById("expoCurr").innerHTML = curr;
-        } 
-        else if (name.includes("사당12") || name.includes("사당동288")) {
-          document.getElementById("sadang12Stage").innerText = stage;
-          document.getElementById("sadang12Curr").innerHTML = curr;
-        } 
-        else if (name.includes("사당동300") || name.includes("300일대")) {
-          document.getElementById("sadang300Stage").innerText = stage;
-          document.getElementById("sadang300Curr").innerHTML = curr;
-        } 
-        else if (name.includes("신대방3") || name.includes("신대방344")) {
-          document.getElementById("sdb344Stage").innerText = stage;
-          document.getElementById("sdb344Curr").innerHTML = curr;
-        } 
-        else if (name.includes("용두7구역")) {   // ✅ 정확한 매칭
-          document.getElementById("yd7Stage").innerText = stage;
-          document.getElementById("yd7Curr").innerHTML = curr;
+        const rowName = item.현장명 || "";
+        // 현장 매칭 찾기
+        const site = sites.find(s => s.keywords.some(k => rowName.includes(k)));
+        
+        if (site) {
+          const card = document.getElementById(`card-${site.id}`);
+          card.querySelector(".badge").innerText = (item.진행단계 || "단계 미정").replace(/\n/g, " ");;
+          card.querySelector(".badge").style.background = "#e5e9ff";
+          card.querySelector(".prev").innerHTML = (item.전주업무현황 || "보고사항 없음").replace(/\n/g, "<br>");
+		  card.querySelector(".res").innerHTML = (item.결과 || "보고사항 없음").replace(/\n/g, "<br>");
+          card.querySelector(".curr").innerHTML = (item.금주업무현황 || "예정사항 없음").replace(/\n/g, "<br>");
+          card.querySelector(".etc").innerHTML = (item.점검및결정사항 || "특이사항 없음").replace(/\n/g, "<br>");
         }
       });
     })
-    .catch(err => {
-      console.error("데이터 로딩 오류:", err);
-      document.querySelectorAll("p").forEach(p => p.textContent = "데이터 로딩 실패");
-    });
+    .catch(err => console.error("데이터 로드 실패:", err));
 });
 </script>
-
-
-
 
 </body>
 </html>
